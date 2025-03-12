@@ -2,8 +2,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
 
-app = Flask(__name__)
-CORS(app)  # Allow all origins by default
+app = Flask(__name__)  # Ensure this variable name is 'app'
+CORS(app)
 
 @app.route('/generate', methods=['POST'])
 def generate():
@@ -28,4 +28,4 @@ def generate():
     })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000)  # Ensure the correct app variable is used
