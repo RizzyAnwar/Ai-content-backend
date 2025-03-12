@@ -2,8 +2,9 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
 
-app = Flask(__name__)  # Ensure this variable name is 'app'
-CORS(app)
+# Initialize Flask App
+app = Flask(__name__)  
+CORS(app)  # Allow API requests from other websites
 
 @app.route('/generate', methods=['POST'])
 def generate():
@@ -18,8 +19,10 @@ def generate():
 
     response = openai.ChatCompletion.create(
         model="gpt-4",
-        messages=[{"role": "system", "content": "You are an AI specializing in digital marketing content creation."},
-                  {"role": "user", "content": prompt}]
+        messages=[
+            {"role": "system", "content": "You are an AI specializing in digital marketing content creation."},
+            {"role": "user", "content": prompt}
+        ]
     )
 
     return jsonify({
@@ -28,4 +31,4 @@ def generate():
     })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)  # Ensure the correct app variable is used
+    app.run(host='0.0.0.0', port=5000)
